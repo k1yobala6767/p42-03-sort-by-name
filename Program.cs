@@ -7,23 +7,51 @@ class Program
     // Напишите сортировку сами (например, пузырьком), меняя местами элементы массива.
     static void SortByName(Student[] students)
     {
-        // TODO: напишите решение здесь
+    for (int pass = 0; pass < students.Length - 1; pass++)
+{
+    for (int j = 0; j < students.Length - 1 - pass; j++)
+    {
+        if (string.Compare(students[j + 1].Name, students[j].Name) < 0)
+        {
+            Student t = students[j];
+            students[j] = students[j + 1];
+            students[j + 1] = t;
+        }
+    }
+}
     }
 
     // Перенесите сюда свой метод FindHigh из Задания 8:
     // новый массив из студентов, у которых есть оценки и средний балл >= minAverage.
     static Student[] FindHigh(Student[] group, double minAverage)
     {
-        // TODO: напишите решение здесь
-        return new Student[0];
+    int count = 0;
+foreach (Student s in group)
+{
+    if (s.HasScores && s.Average >= minAverage)
+        count++;
+}
+
+Student[] result = new Student[count];
+int index = 0;
+foreach (Student s in group)
+{
+    if (s.HasScores && s.Average >= minAverage)
+    {
+        result[index] = s;
+        index++;
+    }
+}
+return result;
     }
 
     // Верните студентов с высоким баллом, отсортированных по имени.
     // Используйте FindHigh и SortByName. Исходный массив group менять нельзя.
     static Student[] HighSortedByName(Student[] group, double minAverage)
     {
-        // TODO: напишите решение здесь
-        return new Student[0];
+        Student[] result = FindHigh(group, minAverage);
+             SortByName(result);
+return result;
     }
 
     static void Main()
